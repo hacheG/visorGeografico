@@ -21,10 +21,16 @@ html{
 
 /* ===============TABLA ====================*/
 #formulario{
+    /* border: 1px solid red; */
+}
 
+.tabla{
+    text-align: center;
 }
 
 table{
+    margin-left: auto;
+    margin-right: auto;
     border: 3px double black;
     background-color: #e5ddc4;
     /* font-size: x-large */

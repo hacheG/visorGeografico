@@ -22,6 +22,7 @@ html{
 /* ===============TABLA ====================*/
 #formulario{
     /* border: 1px solid red; */
+    margin-bottom: 1vw;
 }
 
 .tabla{
@@ -32,8 +33,7 @@ table{
     margin-left: auto;
     margin-right: auto;
     border: 3px double black;
-    background-color: #e5ddc4;
-    /* font-size: x-large */
+    background-color: #eeebe4;
 }
 
 .tabla__puntos-mapa thead{

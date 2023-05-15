@@ -181,6 +181,7 @@ function blur(e, inputText){
     console.log("GeoDato desde nombres",geoDato);
     
 }
+
 /** Funcion para llenar la tabla */
 function llenandoTabla( datos ){
     const tBody = document.querySelector("tbody");
@@ -200,7 +201,7 @@ function llenandoTabla( datos ){
         td2.textContent = geoDato._latlng.lng;
 
         const div = document.createElement("div")
-        div.style.border = "1px solid red";
+        div.style.border = "1px solid grey";
         const td3 = document.createElement("td");
         const inputText = document.createElement("input");
         inputText.type = "text";
@@ -222,7 +223,10 @@ function llenandoTabla( datos ){
         const a = document.createElement("a");
         a.href = "javascript:void(0)";
         a.classList.add("borrar-geoDato");
-        a.id = geoDato._leaflet_id
+        a.id = geoDato._leaflet_id;
+        a.style.color = "#A830F2";
+        a.style.textDecoration = "none";
+        a.style.fontSize = "x-large"
         a.textContent = "X";
         td4.appendChild(a);
         // const inputBtn = document.createElement("input");

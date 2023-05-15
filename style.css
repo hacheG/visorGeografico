@@ -1,6 +1,8 @@
+/*====== GENERALES ===========*/
 html{
     font-family: 'Domine', serif;
     box-sizing: border-box;
+    background-color: #e5ddc4;
 }
 
 *,
@@ -8,16 +10,39 @@ html{
 *:after {
   box-sizing: inherit;
 }
+/*===========================================*/
 
+/* ====================== MAPA ==========*/
 #map{
-    border: 1px solid red;
+    border: 15px double rgb(0, 0, 0);
     height: 100vh; 
 }
+/*==========================================*/
 
-header{
-    text-align: center;
-}
-
+/* ===============TABLA ====================*/
 table{
     border: 1px solid black;
+    /* font-size: x-large */
 }
+
+.tabla__puntos-mapa thead{
+    color: #5832FC;
+}
+
+.button-vaciar{
+    color: #A830F2;
+    text-decoration: none;
+}
+/*=========================================*/
+
+/* ================ LAYOUT ==================*/
+header{
+    text-align: center;
+    color: #5832FC;
+    background-color: rgb(238, 236, 223);
+    border: 5px double rgb(8, 8, 8);
+    width: 17vw;
+    margin: 0 auto;
+    padding: 0px;
+}
+/*===========================================*/

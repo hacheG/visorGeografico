@@ -1,3 +1,13 @@
+html{
+    font-family: 'Domine', serif;
+    box-sizing: border-box;
+}
+
+*,
+*:before, 
+*:after {
+  box-sizing: inherit;
+}
 
 #map{
     border: 1px solid red;

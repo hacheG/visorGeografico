@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+     <link rel="stylesheet" href="style.css">
+     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+    <title>Prueba Tecnica</title>
+</head>
+<body>
+    <div id="map"></div>
+    <form action="" id="formulario">
+
+        <div class="tabla">
+            <table class="tabla__puntos-mapa">
+                <thead>
+                    <tr>
+                        <th>Latitud</th>
+                        <th>Longitud</th>
+                        <th>Texto</th>
+                        <th></th>
+                        
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <a href="javascript:void(0)" class="button-vaciar">Limpiar Tabla</a>
+            <input type="submit" value="ENVIAR" class="btn">
+        </div>
+    </form>
+    
+    <script src="app.js"></script>
+    <!-- <script src="indexedDB.js"></script> -->
+</body>
+</html>

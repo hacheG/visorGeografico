@@ -20,8 +20,13 @@ html{
 /*==========================================*/
 
 /* ===============TABLA ====================*/
+#formulario{
+
+}
+
 table{
-    border: 1px solid black;
+    border: 3px double black;
+    background-color: #e5ddc4;
     /* font-size: x-large */
 }
 
@@ -38,6 +43,7 @@ table{
 /* ================ LAYOUT ==================*/
 header{
     text-align: center;
+    font-size: 1vw;
     color: #5832FC;
     background-color: rgb(238, 236, 223);
     border: 5px double rgb(8, 8, 8);

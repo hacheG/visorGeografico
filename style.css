@@ -57,4 +57,10 @@ header{
     margin: 25px auto;
     padding: 0px;
 }
+
+details summary{
+    font-size: x-large;
+    color: #5832FC;
+
+}
 /*===========================================*/

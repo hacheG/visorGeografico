@@ -318,6 +318,7 @@ function imprimirGeoDatos(){
         const cursor = e.target.result;
         if(cursor){
             console.log(e.target.result.value);
+            
             const h2 = document.createElement("h2");
             h2.textContent = e.target.result.value.nombre;
             h2.style.marginBottom = 0;

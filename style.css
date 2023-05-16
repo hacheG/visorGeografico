@@ -61,6 +61,10 @@ header{
 details summary{
     font-size: x-large;
     color: #5832FC;
+}
+
+.imprimiendoDB{
+    background-color: #eeebe4;
 
 }
 /*===========================================*/

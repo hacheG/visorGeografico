@@ -11,6 +11,7 @@ const options = {
     draggable : true
 }
 /** Definicion de variables */
+const imprimiendoDB = document.querySelector(".imprimiendoDB");
 let retornoPLaceholder;
 let DB;
 let datosGeograficos = [];
@@ -283,6 +284,9 @@ function crearDB(){
         console.log("BD Creada - onsucces");
         DB = crearDB.result;
         console.log(DB);
+
+        /** Mostrar citas al cargar con INDEXED DB ya listo */
+        imprimirGeoDatos();
     }
 
     /** Definiendo el schema */
@@ -304,7 +308,37 @@ function crearDB(){
     }
 }
 
+function imprimirGeoDatos(){
+    console.log("desde imprimirGeoDatos()", imprimiendoDB);
+    /** Leer el contenido de la base de datos */
+    const objectStore = DB.transaction("geo").objectStore("geo");
 
+    objectStore.openCursor().onsuccess = function(e){
+        // console.log(e.target.result);
+        const cursor = e.target.result;
+        if(cursor){
+            console.log(e.target.result.value);
+            const h2 = document.createElement("h2");
+            h2.textContent = e.target.result.value.nombre;
+            h2.style.marginBottom = 0;
+
+            const div1 = document.createElement("div");
+            div1.textContent = `Latitud: ${e.target.result.value.latitud}`;
+            
+            const div2 = document.createElement("div");
+            div2.textContent = `Longitud: ${e.target.result.value.longitud}`;
+
+            const linea = document.createElement("hr");
+            imprimiendoDB.appendChild(h2);
+            imprimiendoDB.appendChild(div1);
+            imprimiendoDB.appendChild(div2);
+            imprimiendoDB.appendChild(linea);
+
+            /** Al siguiente elemento */
+            cursor.continue();
+        }
+    }
+}
 // function palDB(geoDato){
     
 //     const enviar = document.querySelector(".btn");

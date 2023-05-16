@@ -14,7 +14,6 @@ const options = {
 const imprimiendoDB = document.querySelector(".imprimiendoDB");
 let retornoPLaceholder;
 let DB;
-let datosGeograficos = [];
 let marcadores = [];
 let nombres = [];
 let geoDato = [];
@@ -24,7 +23,7 @@ window.onload = () => {
 
     /*Evento del mapa */
     map.on("click", mapaTest);
-    
+
     crearDB();
 }
 
@@ -34,16 +33,13 @@ var popup = L.popup({
 });
 
 function onMapToolTip(e) {
-    console.log(nombres);
-    console.log(e.target._leaflet_id);
     let nombreTooltip = nombres.filter( datoNombre => datoNombre.id == e.target._leaflet_id);
-    console.log(nombreTooltip);
+    
     popup
     .setLatLng(e.latlng)
     .setContent(`<b style='font-size: small;'> ${nombreTooltip[0].nombre} - ${e.latlng.toString()}</b>`)
     .openOn(map);
 }
-
 
 /*Funcion para poner marcadores */
 function mapaTest(e){
@@ -56,22 +52,13 @@ function mapaTest(e){
 
     marker2 = L.marker([coord1, coord2]).addTo(map);
     marcadores = [...marcadores, marker2]
-    
-    console.log("array marcadores", marcadores);
-    /** Info para extrer datos */
-    // console.log(marcadores[0]._latlng.lat);
-    // console.log(marcadores[0]._latlng.lng);
-    // console.log(marcadores[0]._leaflet_id);
 
     const infoCoord = {
         lat: coord1,
         long: coord2,
         id: marker2._leaflet_id
     }
-    // Agregando elementos al array
-    datosGeograficos = [...datosGeograficos, infoCoord];
 
-    // llenandoTabla(datosGeograficos); SE REEMPLAZA POR:
     llenandoTabla(marcadores)
 
     /** Evento del marcador con tooltip */
@@ -90,13 +77,12 @@ function mapaTest(e){
         console.log(datosGeograficos);
     });
 
-
     /** Borrar dato desde X de la tabla */
     const tabla = document.querySelector(".tabla__puntos-mapa");
     tabla.addEventListener("click", (e) => {
         e.preventDefault;
         if(e.target.classList.contains("borrar-geoDato") ){
-            // const datoId = e.target.getAttribute("data-id");
+
             const datoId = e.target.id;
             
             let marcadorBorrar = marcadores.filter( geoDato => geoDato._leaflet_id == datoId);
@@ -104,28 +90,15 @@ function mapaTest(e){
             marcadores = marcadores.filter( geoDato => geoDato._leaflet_id != datoId);
             llenandoTabla( marcadores );
 
-            map.removeLayer(marcadorBorrar[0]);/**PILAS CON ESTA LINEA  todo es marker2 enotnces se borra todo a la vez*/
+            map.removeLayer(marcadorBorrar[0]);
             nombres = [];
         }
     });
-    
 }
-//================
 
-
-function probar(e){
-    console.log(e.target);
-    const nombre = document.querySelector(".textArea").value;
-    console.log(nombre);
-}
-//==================
 /**Funcion del text */
 function blur(e, inputText){
 
-    console.log(e.target.classList[1]);
-    console.log(e.target.classList[2]);
-    console.log("EL ID: ", e.target.id);
-    console.log("EL dato: ", e.target.value);
     const datoNombre = {
         nombre: e.target.value,
         id: e.target.id,
@@ -133,15 +106,13 @@ function blur(e, inputText){
         longitud: e.target.classList[2]
     }
     nombres = [...nombres, datoNombre];
-    geoDato = [...geoDato, datoNombre];
-    
+
     const formulario = document.querySelector("#formulario");
     formulario.addEventListener("submit", nuevoGeoDato);
 
     function nuevoGeoDato(e){
         e.preventDefault();
-        console.log("desde nuevo geo dato...", datoNombre);
-        
+
         const geoMarcadorDB = {
             nombre: datoNombre.nombre,
             id: Date.now(),
@@ -169,18 +140,10 @@ function blur(e, inputText){
         transaction.oncomplete = function(){
             console.log("GEODATO Agregado");
         };
-
-        /** Borrar tabla al finalizar envio*/
-        // marcadores.forEach( marker => map.removeLayer(marker))
-        
-        // marcadores = [];
-        // llenandoTabla( marcadores )
-        
     }
-    
+
     console.log(nombres);
-    console.log("GeoDato desde nombres",geoDato);
-    
+
 }
 
 /** Funcion para llenar la tabla */
@@ -189,10 +152,10 @@ function llenandoTabla( datos ){
 
     // Limpiar HTML
     limpiarHTML();
-    datos.forEach( data => console.log(data))
+
     // Recorriendo el Objeto de datos geograficos
     datos.forEach( geoDato => {
-        // const { _latlng.lat, _latlng.lng, _leaflet_id} = geoDato
+
         const row = document.createElement("tr");
         
         const td1 = document.createElement("td");
@@ -210,15 +173,12 @@ function llenandoTabla( datos ){
         inputText.classList.add("textArea", geoDato._latlng.lat, geoDato._latlng.lng);
         inputText.id = geoDato._leaflet_id
         inputText.autocomplete = "off"
-        // let retornoPLaceholder;
+
         inputText.onblur = function(e, inputText){
              blur(e, inputText);
-            
         }
-        // inputText.placeholder = retornoPLaceholder;
-        console.log(inputText.id);
-        td3.appendChild(inputText);
 
+        td3.appendChild(inputText);
 
         const td4 = document.createElement("td");
         const a = document.createElement("a");
@@ -230,17 +190,8 @@ function llenandoTabla( datos ){
         a.style.fontSize = "x-large"
         a.textContent = "X";
         td4.appendChild(a);
-        // const inputBtn = document.createElement("input");
-        // inputBtn.value = "SEND";
-        // inputBtn.type = "submit";
-        // inputBtn.classList.add("btn")
-        // inputBtn.onclick = function(e){
-        //     probar(e);
-        // }
-        // td4.appendChild(inputBtn);
 
-        div.appendChild(td3)
-        // div.appendChild(td4)
+        div.appendChild(td3);
 
         row.appendChild(td1);
         row.appendChild(td2);
@@ -249,16 +200,12 @@ function llenandoTabla( datos ){
 
         // LLenando la tabla
         tBody.appendChild(row);
-
     });
 };
 
 function limpiarHTML(){
     const tBody = document.querySelector("tbody");
     tBody.innerHTML = "";
-    // while(tBody.firstChild){
-    //     tBody.removeChild(tBody.firstChild)
-    // }
 }
 
 const btnLimpiarTabla = document.querySelector(".button-vaciar");
@@ -301,24 +248,23 @@ function crearDB(){
         /** Definiendo todas las columnas */
         objectStore.createIndex("latitud", "latitud", { unique: false});
         objectStore.createIndex("longitud", "longitud", { unique: false});
-        objectStore.createIndex("nombre", "nombre", { unique: false});
+        objectStore.createIndex("nombre", "nombre", { unique: true});
         objectStore.createIndex("id", "id", { unique: false});
 
         console.log("DB creada y lista");
     }
-}
+};
 
 function imprimirGeoDatos(){
-    console.log("desde imprimirGeoDatos()", imprimiendoDB);
+
     /** Leer el contenido de la base de datos */
     const objectStore = DB.transaction("geo").objectStore("geo");
-
+    
     objectStore.openCursor().onsuccess = function(e){
-        // console.log(e.target.result);
+
         const cursor = e.target.result;
+
         if(cursor){
-            console.log(e.target.result.value);
-            
             const h2 = document.createElement("h2");
             h2.textContent = e.target.result.value.nombre;
             h2.style.marginBottom = 0;
@@ -339,10 +285,4 @@ function imprimirGeoDatos(){
             cursor.continue();
         }
     }
-}
-// function palDB(geoDato){
-    
-//     const enviar = document.querySelector(".btn");
-//     sendGeoDato(geoDato);
-//     console.log("palDB", geoDato);
-// }
+};
